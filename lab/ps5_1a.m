@@ -1,5 +1,7 @@
 close all;
 
+addpath('..\src');
+
 seq = read('TestSeq');
 
 if (~isdir('Output/TestSeq'))

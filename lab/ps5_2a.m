@@ -1,4 +1,7 @@
 close all;
+clear all;
+
+addpath('..\src');
 
 if (~isdir('Output/DataSeq1'))
     mkdir('Output/DataSeq1');
