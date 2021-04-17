@@ -1,7 +1,9 @@
 close all;
 clear all;
 
-seqName = "TestSeq";
+addpath('..\src');
+
+seqName = "DataSeq2";
 
 if (~isdir('Output/' + seqName))
     mkdir(char('Output/' + seqName));
@@ -9,17 +11,17 @@ end
 
 seq = read(seqName);
 
-indices = [1, 2; 1, 4; 1, 5];
+indices = [1, 2; 2, 3];
 
-base_name = "Output/" + seqName + "/ps5_4a";
+base_name = "Output/" + seqName + "/ps5_4c";
 
 for i=1:size(indices,1)
     
     img0 = squeeze(seq(indices(i,1),:,:));
     img1 = squeeze(seq(indices(i,2),:,:));
 
-    [u, v, idx] = hlk(img0, img1, 6, 2, 0.01);
-    f = display_flow_uv(u, v, jet, [-45, 45]);
+    [u, v, idx] = hlk(img0, img1, 5, 7, 0.001);
+    f = display_flow_uv(u, v, jet, [-10, 10]);
     save_figure(f, base_name + "_" + string(indices(i,2)) + "_uv.png");
 
     f = display_flow_arrows(img1, u, v, idx);
@@ -33,4 +35,16 @@ for i=1:size(indices,1)
     title('Delta image');
     
     imwrite(delta, char(base_name + "_" + string(indices(i,2)) + "_delta.png"));
+    
+    figure;
+    imshow(img1w);
+    title('Warped image');
+    imwrite(img1w, char(base_name + "_" + string(indices(i,2)) + "_warped.png"));
+    
+    figure;
+    display_flow_mag(u, v, idx);
+    
+    figure;
+    display_flow_angle(u, v, idx);
+    
 end

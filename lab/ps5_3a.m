@@ -1,5 +1,7 @@
 close all;
+clear all;
 
+addpath('..\src');
 
 smooth_on = 0;
 

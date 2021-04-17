@@ -1,5 +1,7 @@
 close all;
 
+addpath('..\src');
+
 image = zeros([240, 240], 'double');
 
 image(:) = 0.5;

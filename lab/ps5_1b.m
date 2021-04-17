@@ -1,4 +1,7 @@
 close all;
+clear all;
+
+addpath('..\src');
 
 seq = read('TestSeq');
 

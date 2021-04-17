@@ -1,4 +1,7 @@
 close all;
+clear all;
+
+addpath('..\src');
 
 seq = read('DataSeq2');
 img0 = squeeze(seq(1,:,:));
