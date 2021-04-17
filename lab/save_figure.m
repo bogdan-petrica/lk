@@ -1,4 +1,3 @@
-
 function save_figure(f, name)
     frame = getframe(f);
     img = frame.cdata;

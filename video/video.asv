@@ -20,10 +20,10 @@ while hasFrame(reader)
     frame = imresize(frame, [h, w]);
     
     if have_prev
-        [u, v, idx] = hlk(prev, frame, 5, 7, 0.002);
+        [u, v, idx] = hlk(prev, frame, 5, 5, 0.002);
         frame_angle = flow_angle(u, v, idx);
         
-        frame_visu = [ind2rgb(uint8(frame * size(gray, 1)), gray); frame_angle];
+        frame_visu = [ind2rgb(uint8(frame * size(gray, 1255), gray); frame_angle];
         
         set(0, 'CurrentFigure', f);
         imshow(frame_visu);

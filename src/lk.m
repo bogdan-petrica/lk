@@ -4,9 +4,9 @@ function [u, v, valid] = lk(prev, curr, varargin)
     % curr              - current image
     % type              - box ( equal weights ) or gaussian, default is box
     % wing_size         - is the wing size of the aperture were
-    %                     flow is determined, default is 7
-    % threshold         - value for flow to consider it high enough, default
-    %                     0.002
+    %                     flow is determined, default is 5
+    % threshold         - value for flow to consider it high enough,
+    %                     default 0.002
     assert(all(size(prev) == size(curr)));
     
     if nargin < 3

@@ -1,4 +1,3 @@
-
 function res = down(image)
     v = [1, 4, 6, 4, 1]/16;
     filter = v'  * v;
