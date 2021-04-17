@@ -1,4 +1,10 @@
-function display_flow_angle(u, v, idx)
+function display_flow_angle(u, v, idx, varargin)
+    if nargin < 4
+        f = figure;
+    else
+        f = varargin{1};
+    end
+
     assert(all(size(u) == size(v)));
 
     hsv_colors = [((0:100)/100)', ones(101, 1) * 0.7, ones(101, 1) * 0.7];
@@ -10,6 +16,6 @@ function display_flow_angle(u, v, idx)
     image = zeros(size(u));
     image(idx) = angle_idx(idx);
 
-    figure;
+    set(0, 'CurrentFigure', f);
     imshow(ind2rgb(image, colors));
 end

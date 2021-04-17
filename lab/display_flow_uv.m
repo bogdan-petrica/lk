@@ -4,8 +4,14 @@ function f = display_flow_uv(u, v, colors, varargin)
     else
         lim = varargin{1};
     end
+    
+    if nargin < 5
+        f = figure;
+    else
+        f = varargin{2};
+    end
 
-    f = figure;
+    set(0, 'CurrentFigure', f);
     ax = subplot(1, 2, 1);
     
     imagesc(u);

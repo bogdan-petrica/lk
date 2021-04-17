@@ -41,10 +41,8 @@ for i=1:size(indices,1)
     title('Warped image');
     imwrite(img1w, char(base_name + "_" + string(indices(i,2)) + "_warped.png"));
     
-    figure;
     display_flow_mag(u, v, idx);
     
-    figure;
     display_flow_angle(u, v, idx);
     
 end

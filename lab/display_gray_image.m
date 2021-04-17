@@ -1,5 +1,11 @@
-function display_gray_image(image)
-    figure;
+function display_gray_image(image, varargin)
+    if nargin < 2
+        f = figure;
+    else
+        f = varargin{1};
+    end
+
+    set(0, 'CurrentFigure', f);
     imagesc(image);
     colormap gray;
     ax = gca;
