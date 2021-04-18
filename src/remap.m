@@ -20,11 +20,11 @@ function dst = remap(src, u, v)
 
     %{
     % r0.a0
-    r0 = round(v);
+    r0 = floor(v);
     a0 = v - r0;
     
     % c0.b0
-    c0 = round(u);
+    c0 = floor(u);
     b0 = u - c0;
     
     a = lookup(src, r0, c0);
