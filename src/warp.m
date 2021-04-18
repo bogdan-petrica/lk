@@ -2,12 +2,11 @@ function res = warp(image, du, dv)
     assert(all(size(image) == size(du)));
     assert(all(size(image) == size(dv)));
     
-    idx = 1:(size(du,1)*size(du,2));
-    [r, c] = ind2sub(size(du), idx);
+    r = size(image, 1);
+    c = size(image, 2);
     
-    u = reshape(c, size(du)) + du;
-    v = reshape(r, size(dv)) + dv;
+    [u, v] = meshgrid(1:c, 1:r);
     
-    res = remap(image, u, v);
+    res = remap(image, u + du, v + dv);
 end
 

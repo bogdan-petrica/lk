@@ -72,12 +72,13 @@ function [res_du, res_dv] = compose_flow(du, dv, du0, dv0)
     assert(all(size(du) == size(dv)));
     assert(all(size(du0) == size(dv0)));
     assert(all(size(du) == size(du0)));
-
-    idx = 1:(size(du,1)*size(du,2));
-    [r, c] = ind2sub(size(du), idx);
     
-    u0 = reshape(c, size(du0)) + du0;
-    v0 = reshape(r, size(dv0)) + dv0;
+    r = size(du, 1);
+    c = size(du, 2);
+    
+    [u, v] = meshgrid(1:c, 1:r);
+    u0 = u + du0;
+    v0 = v + dv0;
 
     res_du = remap(du, u0, v0) + du0;
     res_dv = remap(dv, u0, v0) + dv0;

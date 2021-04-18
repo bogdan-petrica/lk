@@ -5,30 +5,37 @@ addpath('..\lab');
 addpath('..\src');
 
 reader = VideoReader('CarSeq/video.mp4');
-have_prev = 0;
 
 display_flow_angle_legend(60, 60);
 
-f = figure;
-
 h = 360;
 w = 640;
+sz = [h, w];
 
+f = figure;
+a = axes;
+
+prev = nextFrame(reader, sz);
 while hasFrame(reader)
-    frame_rgb = readFrame(reader);
-    frame = double(rgb2gray(frame_rgb)) / 255.;
-    frame = imresize(frame, [h, w]);
+    frame = nextFrame(reader, sz);
     
-    if have_prev
-        [u, v, idx] = hlk(prev, frame, 5, 7, 0.002);
-        frame_angle = flow_angle(u, v, idx);
+    [u, v, idx] = hlk(prev, frame, 5, 7, 0.002);
+    frame_angle = flow_angle(u, v, idx);
         
-        frame_visu = [ind2rgb(uint8(frame * size(gray, 1)), gray); frame_angle];
-        
-        set(0, 'CurrentFigure', f);
-        imshow(frame_visu);
-    end
+    frame_visu = [gray2rgb(frame); frame_angle];
+    image(a, frame_visu);
+    a.DataAspectRatio = [ 2 * h, w, 1 ];
+    drawnow;
     
     prev = frame;
-    have_prev = 1;
+end
+
+function frame = nextFrame(reader, sz)
+    frame_rgb = readFrame(reader);
+    frame = double(rgb2gray(frame_rgb)) / 255.;
+    frame = imresize(frame, sz);
+end
+
+function image = gray2rgb(rgb)
+    image = ind2rgb(uint8(rgb * size(gray, 1)), gray);
 end
