@@ -11,10 +11,34 @@ function dst = remap(src, u, v)
     
     [uu, vv] = meshgrid(1:c, 1:r);
     %}
-    dst = interp2(src, u, v, 'linear');
-    iidx = find(isnan(dst));
-    temp = interp2(src, u, v, 'nearest', 0);
-    dst(iidx) = temp(iidx);
+    
+    %{
+    r = size(du, 1);
+    c = size(du, 2);
+    
+    [u, v] = meshgrid(1:c, 1:r);
+    
+    u0 = u + du0;
+    v0 = v + dv0;
+    %}
+    
+    src_pad = padarray(src, [1, 1], 'replicate');
+    u_pad = padarray(u, [1, 1], 'replicate');
+    v_pad = padarray(v, [1, 1], 'replicate');
+    
+    r = size(u_pad, 1);
+    c = size(v_pad, 2);
+    
+    [uu_pad, vv_pad] = meshgrid(1:c, 1:r);
+    
+    uu_pad = uu_pad + u_pad;
+    vv_pad = vv_pad + v_pad;
+    
+    dst_pad = interp2(src_pad, uu_pad, vv_pad, 'linear');
+    iidx = find(isnan(dst_pad));
+    temp = interp2(src_pad, uu_pad, vv_pad, 'nearest', 0);
+    dst_pad(iidx) = temp(iidx);
+    dst = dst_pad(2:r-1,2:c-1);
     
     
 

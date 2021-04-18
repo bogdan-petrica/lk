@@ -1,6 +1,6 @@
 function res = flow_angle(u, v, idx)
     % takes flow as u, v, idx and
-    % generates an RGB color iamge where every pixel 
+    % generates an RGB color image where every pixel 
     % color coresponds to the flow vector angle.
     assert(all(size(u) == size(v)));
 
