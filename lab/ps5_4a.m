@@ -20,7 +20,7 @@ for i=1:size(indices,1)
     img0 = squeeze(seq(indices(i,1),:,:));
     img1 = squeeze(seq(indices(i,2),:,:));
 
-    [u, v, idx] = hlk(img0, img1, 6, 2, 0.01);
+    [u, v, idx] = hlk(img0, img1, 6, 3, 0.01);
     f = display_flow_uv(u, v, jet, [-45, 45]);
     save_figure(f, base_name + "_" + string(indices(i,2)) + "_uv.png");
 
